@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include "shape.h"
+
 using namespace std;
 
 class CAD
