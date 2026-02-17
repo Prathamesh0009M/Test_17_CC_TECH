@@ -1,6 +1,7 @@
 1)  **How to Compile and Run**
 
 Step 1: g++ -std=c++17 index.cpp -o index
+
 Step 2: .\index        
 
 
