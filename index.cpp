@@ -7,6 +7,10 @@ class CAD
 public:
     virtual void display() = 0;
     virtual CAD *clone() = 0;
+    virtual ~CAD() 
+    {
+        cout << "CAD object Destroyed" << endl;
+    }
 };
 
 class Line : public CAD
@@ -66,7 +70,6 @@ public:
     }
 };
 
-
 class DOCUMENT
 {
 public:
@@ -88,20 +91,27 @@ public:
 
     void removeObject(int index)
     {
-      
+
         delete objects[index];
         objects.erase(objects.begin() + index);
     }
 
     void cloneObject(int index)
     {
-       
+
         CAD *newObject = objects[index]->clone();
         objects.push_back(newObject);
         cout << "Object Cloned Successfully\n";
     }
 
-  
+    ~DOCUMENT()
+    {
+        for(auto obj:objects)
+        {
+            delete obj;
+        }
+        cout << "documents destroyed" << endl;
+    }
 };
 
 class USERINTERFACE
@@ -136,7 +146,7 @@ public:
 
     void cloneNewObject()
     {
-        cout << "Select object number to clone: "<< endl;
+        cout << "Select object number to clone: " << endl;
         doc->listALLObjects();
         int input;
         cin >> input;
@@ -181,5 +191,7 @@ int main()
     user.DeleteObject();
     user.listObjects();
 
-    return 0;   
+    delete docs;
+
+    return 0;
 }
